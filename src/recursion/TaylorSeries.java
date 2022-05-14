@@ -13,7 +13,7 @@ public class TaylorSeries {
 		r = e(x,n-1);
 		p=p*x;
 		f=f*n;
-		System.out.println("p,f : "+p+" "+f);
+// 		System.out.println("p,f : "+p+" "+f);
 		return r+p/f;
 	}
 }
