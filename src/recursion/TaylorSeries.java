@@ -1,19 +1,26 @@
 package recursion;
 
 public class TaylorSeries {
-	static int p=1,f=1;
+	static double p=1,f=1,s=1;
 	public static void main(String args[]) {
-		System.out.println(e(2,3));
+		System.out.println(e1(12,4)+"\n"+e2(12,4));
 	}
-	static int e(int x,int n) {
+	static double e1(int x,int n) {
 		if(n==0) {
 			return 1;
 		}
-		int r;
-		r = e(x,n-1);
+		double r;
+		r = e1(x,n-1);
 		p=p*x;
 		f=f*n;
-// 		System.out.println("p,f : "+p+" "+f);
 		return r+p/f;
+	}
+	
+	static double e2(int x,int n) {
+		if(n==0) {
+			return s;
+		}
+		s =1+(x*s)/n;
+		return e2(x,n-1);
 	}
 }
