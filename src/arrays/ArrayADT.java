@@ -26,6 +26,17 @@ class Node{
 		}
 		length++;
 	}
+	
+	void add(int index, int value) {
+		if(index<=length && index >=0 ) {
+			int i =length;
+			while(i>=index) {
+				a[i] = a[i-1];
+			}
+		}
+		a[index] = value;
+		length++;
+	}
 }
 
 //public class ArrayADT {
