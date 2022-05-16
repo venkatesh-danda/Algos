@@ -1,92 +1,113 @@
 package arrays;
 
+import java.util.Arrays;
 
-class Node{
-	
+class Node {
+
 	private int a[];
 	private int size;
 	private int length;
-	
-	Node(int arr[], int length,int size){
-		
+
+	Node(int arr[], int length, int size) {
+
 		this.a = arr;
 		this.size = size;
 		this.length = length;
-	} 
-	
+	}
+
 	void display() {
-		for (int i=0;i<length;i++) {
+		for (int i = 0; i < length; i++) {
 			System.out.print(a[i]);
 		}
+
+		System.out.println("\tLength : " + length);
 	}
-	
+
 	void append(int value) {
-		if(length < size) {
+
+//		System.out.print(length);
+		if (length < size) {
 			a[length] = value;
 		}
 		length++;
 	}
-	
-	void add(int index, int value) {
-		if(index<=length && index >=0 ) {
-			int i =length;
-			while(i>=index) {
-				a[i] = a[i-1];
+
+	void insert(int index, int value) {
+		if (index <= length && index >= 0) {
+			int i = length;
+			while (i > index) {
+				a[i] = a[--i];
+			}
+
+			a[index] = value;
+			length++;
+		}
+
+	}
+
+	void delete(int index) {
+		if (index < length && index >= 0) {
+			int i = index;
+			while (i < length - 1) {
+				a[i] = a[++i];
+			}
+			a[--length] = 0;
+		}
+	}
+
+	void swap(int x, int y) {
+		int temp = a[x];
+		a[x] = a[y];
+		a[y] = temp;
+	}
+
+	int linearSearch(int key) {
+
+		for (int i = 0; i < length; i++) {
+			if (a[i] == key) {
+				swap(i, i - 1);
+				return i;
 			}
 		}
-		a[index] = value;
-		length++;
+		return -1;
+	}
+
+	int binarySearch(int key) {
+
+//		Arrays.sort(a);
+		int l = 0;
+		int r = a.length - 1;
+
+		while (l <= r) {
+			int mid = r - l / 2;
+			if (a[mid] == key) {
+				return mid;
+			} else if (a[mid] > key) {
+				r = mid - 1;
+			} else {
+				l = mid + 1;
+			}
+		}
+		return -1;
 	}
 }
 
-//public class ArrayADT {
-//	
-//	public static void main(String args[]) {
-//		Node ob = new Node();
-//		ob.size = 10;
-//		ob.a = new int[ob.size];
-//		
-//		for(int i=0;i<5;i++)
-//			ob.a[i] = i+1;
-//		ob.length = 5;
-//		add(ob,2,10);
-//		display(ob);
-//		delete(ob,4);
-//		display(ob);
-//	}
-//	
-//	static void display(Node arr) {
-//		for(int i=0;i<arr.size;i++)
-//		{
-//			System.out.print(arr.a[i]+" ");
-//		}
-//		System.out.println("length : "+arr.length);
-//	}
-//	
-//	
-//	static void append(int index,int value) {
-//		if(index>=0 && index < length);
-//	}
-//	static void add(Node arr,int index,int value) {
-//		if (index >= arr.length) {
-//			arr.a[index] = value;
-//			arr.length = index++;
-//			return;
-//		}
-//		int i=arr.length;
-//		while(index<i) {
-//			arr.a[i] = arr.a[i--];
-//		}
-//		arr.a[i] = value;
-//		arr.length++;
-//	}
-//	
-//	static void delete(Node arr,int index) {
-//		if(index<arr.length) {
-//			for(int i=index;i<arr.length;i++)
-//				arr.a[i] = arr.a[i+1];
-//			arr.a[--arr.length] = 0;
-//		}
-//	}
+public class ArrayADT {
 
-//}
+	public static void main(String args[]) {
+
+		int arr[] = new int[15];
+		for (int i = 0; i < 5; i++) {
+			arr[i] = i + 1;
+		}
+		Node ob = new Node(arr, 5, 15);
+
+//		ob.insert(3, 6);
+//		ob.display();
+//		ob.delete(3);
+//		ob.display();
+		System.out.println("Find Key  : " + ob.binarySearch(3));
+		ob.display();
+	}
+
+}
