@@ -1,12 +1,10 @@
 package arrays;
 
-import java.util.Arrays;
-
 class Node {
 
 	private int a[];
 	private int size;
-	private int length;
+	int length;
 
 	Node(int arr[], int length, int size) {
 
@@ -25,7 +23,6 @@ class Node {
 
 	void append(int value) {
 
-//		System.out.print(length);
 		if (length < size) {
 			a[length] = value;
 		}
@@ -74,21 +71,33 @@ class Node {
 
 	int binarySearch(int key) {
 
-//		Arrays.sort(a);
 		int l = 0;
-		int r = a.length - 1;
-
+		int r = length - 1;
 		while (l <= r) {
-			int mid = r - l / 2;
+			int mid = l + (r - l) / 2;
 			if (a[mid] == key) {
 				return mid;
-			} else if (a[mid] > key) {
-				r = mid - 1;
-			} else {
+			} else if (key > a[mid]) {
 				l = mid + 1;
+			} else {
+				r = mid - 1;
 			}
 		}
 		return -1;
+	}
+
+	int binaryRec(int l, int h, int key) {
+
+		if (l > h)
+			return -1;
+		int mid = l + (h - l) / 2;
+		if (a[mid] == key) {
+			return mid;
+		} else if (a[mid] > key) {
+			return binaryRec(l, mid - 1, key);
+		} else {
+			return binaryRec(mid + 1, h, key);
+		}
 	}
 }
 
@@ -102,11 +111,8 @@ public class ArrayADT {
 		}
 		Node ob = new Node(arr, 5, 15);
 
-//		ob.insert(3, 6);
-//		ob.display();
-//		ob.delete(3);
-//		ob.display();
-		System.out.println("Find Key  : " + ob.binarySearch(3));
+		int key = 5;
+		System.out.println("Find Key " + key + " : " + ob.binaryRec(0, ob.length - 1, key));
 		ob.display();
 	}
 
