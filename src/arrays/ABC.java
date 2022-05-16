@@ -19,8 +19,6 @@ public class ABC {
 
 				int curr = arr[j] * arr[j];
 				int temp = sum - curr;
-
-//				System.out.println(curr+" "+temp+" "+sum);
 				if (set.contains(temp)) {
 					System.out.print("Found " + curr + "+" + temp + "=" + sum);
 					break;
