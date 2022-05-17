@@ -99,6 +99,26 @@ class Node {
 			return binaryRec(mid + 1, h, key);
 		}
 	}
+	
+	int[] merge(Node arr) {
+		int i = 0;
+		int j = 0;
+		int k = 0;
+		int ra[] = new int[length+arr.length];
+		while(i < length && j< arr.length) {
+			if(a[i] < arr.a[j]) {
+				ra[k++] = a[i++];
+			}
+			else if(a[i] > arr.a[j]) {
+				ra[k++] = arr.a[j++];
+			}
+			else {
+				ra[k++] = a[i++];
+				ra[k++] = arr.a[j++];
+			}
+		}
+		return ra;
+	}
 }
 
 public class ArrayADT {
