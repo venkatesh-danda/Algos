@@ -13,7 +13,7 @@ public class TowerOfHanoi {
 	static void toh(int n, char a, char b, char c) {
 		if (n > 0) {
 			toh(n - 1, a, c, b);
-			System.out.println("From : " + a + " To :" + c);
+			System.out.println(n+" From : " + a + " To :" + c);
 			toh(n - 1, b, a, c);
 		}
 	}
