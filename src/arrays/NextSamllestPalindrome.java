@@ -19,7 +19,6 @@ public class NextSamllestPalindrome {
 		int num = n;
 		int sum = 0;
 		int rem = 0;
-		int c = 1;
 		while (n > 0) {
 			rem = n % 10;
 			sum = (sum * 10 + rem);
