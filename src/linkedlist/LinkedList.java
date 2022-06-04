@@ -41,10 +41,9 @@ public class LinkedList {
 		Node temp = new Node();
 		temp.data = data;
 		temp.next = null;
-		if(head == null && tail == null) {
+		if (head == null && tail == null) {
 			head = tail = temp;
-		}
-		else {
+		} else {
 			tail.next = temp;
 			tail = temp;
 		}
@@ -106,60 +105,79 @@ public class LinkedList {
 	void reverse() {
 		Node prev = null;
 		Node curr = head;
-		while(curr != null) {
+		while (curr != null) {
 			Node temp = curr.next;
 			curr.next = prev;
 			prev = curr;
-			curr =temp;
+			curr = temp;
 		}
-		Node temp = head;
-		head = tail;
-		tail = temp;
+		head = prev;
 
 	}
-	
-	
-	
+
 	// O(n) && O(n)
 	Node left;
+
 	boolean ispalindrome(Node right) {
 		left = head;
-		if(right == null) {
+		if (right == null) {
 			return true;
 		}
 		boolean isp1 = ispalindrome(right.next);
-		if(isp1 == false)
+		if (isp1 == false)
 			return false;
 		boolean res = left.data == right.data;
 		left = left.next;
 		return res;
-		
+
 	}
 
-	void mergeLinkedLists(LinkedList list2) {
+	Node mergeLinkedLists(LinkedList list2) {
 		Node curr1 = head;
 		Node curr2 = list2.head;
-		while(curr1 != null && curr2 !=  null) {
-			if(curr1.data < curr2.data) {
-				curr2.next = curr1.next;
-				curr1.next = curr2;
-				curr2 = curr2.next;
+		LinkedList dummy = new LinkedList();
+		dummy.head = null;
+		Node temp = dummy.head;
+		while (true) {
+			if (curr1 == null) {
+				temp.next = curr2;
+				return dummy.head;
 			}
-			else {
+			if (curr2 == null) {
+				temp.next = curr1;
+				return dummy.head;
+			}
+			if (curr1.data < curr2.data) {
+				if (dummy.head == null) {
+					dummy.head = curr1;
+					temp = curr1;
+				} else {
+					temp.next = curr1;
+					temp = temp.next;
+				}
 				curr1 = curr1.next;
+			} else {
+				if (dummy.head == null) {
+					dummy.head = curr2;
+					temp = curr2;
+				} else {
+					temp.next = curr2;
+					temp = temp.next;
+				}
+				curr2 = curr2.next;
 			}
 		}
 	}
 
 	void isSubset(LinkedList list2) {
-		
+
 	}
 
 	void breakLoop() {
 		Node fast = head.next;
 		Node slow = head;
-		while(fast != slow && fast != null){
-			if(fast.next.next == slow.next) {
+		while (fast != slow && fast != null) {
+			if (fast.next.next == slow.next) {
 				System.out.println("Loop Exists");
 				slow.next = null;
 				return;
@@ -169,23 +187,23 @@ public class LinkedList {
 		}
 		System.out.println("Loop Not Found");
 	}
-		
+
 	void removeLoop2(Node loop) {
 		Node temp = loop;
 		int k = 1;
-		while(temp.next != loop) {
+		while (temp.next != loop) {
 			k++;
 			temp = temp.next;
 		}
-		
+
 		Node ptr1 = head;
 		Node ptr2 = head;
-		for(int i=0;i<k;i++) {
+		for (int i = 0; i < k; i++) {
 			ptr2 = ptr2.next;
 		}
-		
-		while(true) {
-			if(ptr1.next == ptr2.next) {
+
+		while (true) {
+			if (ptr1.next == ptr2.next) {
 				ptr2.next = null;
 				break;
 			}
@@ -193,45 +211,46 @@ public class LinkedList {
 			ptr2 = ptr2.next;
 		}
 	}
+
 	void removeLoop(Node loop_node) {
 		Node ptr1 = head;
 		Node ptr2 = null;
-		
-		while(true) {
+
+		while (true) {
 			ptr2 = loop_node;
-			while(ptr2.next != loop_node && ptr2.next != ptr1) {
+			while (ptr2.next != loop_node && ptr2.next != ptr1) {
 				ptr2 = ptr2.next;
 			}
-			
-			if(ptr2.next == ptr1) {
+
+			if (ptr2.next == ptr1) {
 				ptr2.next = null;
-				System.out.println("Remove Loop"+ptr2.data+"Loop Node" + loop_node+ " "+ptr2 );
+				System.out.println("Remove Loop" + ptr2.data + "Loop Node" + loop_node + " " + ptr2);
 				break;
 			}
 			ptr1 = ptr1.next;
 		}
 	}
-	
-	
+
 	void detectLoop() {
 		Node slow = head;
 		Node fast = head;
-		
-		while(slow != null && fast != null && fast.next != null) {
+
+		while (slow != null && fast != null && fast.next != null) {
 			slow = slow.next;
 			fast = fast.next.next;
-			if(slow == fast) {
+			if (slow == fast) {
 				System.out.println("Loop Found");
 				removeLoop2(slow);
-				
+
 			}
 		}
-		
+
 	}
+
 	void middleOfLinkedList() {
 		Node slow = head;
 		Node fast = head;
-		while(fast!=null) {
+		while (fast != null) {
 			slow = slow.next;
 			fast = fast.next.next;
 		}
@@ -239,22 +258,45 @@ public class LinkedList {
 	}
 
 	void sortLinkedList() {
-		
+
 	}
 
 	int findLength() {
 		Node temp = head;
 		int count = 0;
-		while(temp!=null) {
+		while (temp != null) {
 			count++;
 			temp = temp.next;
 		}
 		return count;
 	}
+
 	void yLinkedList(LinkedList list2) {
 		int len1 = findLength();
 		int len2 = list2.findLength();
-		int k = len1 - len2;
+		Node temp1 = head;
+		Node temp2 = list2.head;
+		int k = 0;
+		if (len1 > len2) {
+			k = len1 - len2;
+			for (int i = 0; i < k; i++) {
+				temp1 = temp1.next;
+			}
+		} else {
+			k = len2 - len1;
+			for (int i = 0; i < k; i++) {
+				temp2 = temp2.next;
+			}
+		}
+
+		while (temp1 != null && temp2 != null) {
+			if (temp1.next == temp2.next) {
+				temp1.next = null;
+				break;
+			}
+			temp1 = temp1.next;
+			temp2 = temp2.next;
+		}
 	}
 
 	void display() {
@@ -265,4 +307,162 @@ public class LinkedList {
 		}
 		System.out.println();
 	}
+
+	void deleteAlternateNodes() {
+		Node temp = head;
+		while (temp != null && temp.next != null) {
+			Node n = temp.next;
+			temp.next = temp.next.next;
+			n.next = null;
+			temp = temp.next;
+		}
+	}
+
+	void rotateByKElements(int k) {
+		Node temp = head;
+		while (temp.next != null) {
+			temp = temp.next;
+		}
+
+		temp.next = head;
+
+		temp = temp.next;
+
+		int c = 1;
+		while (c < k) {
+			temp = temp.next;
+			c++;
+		}
+
+		head = temp.next;
+		temp.next = null;
+
+		tail = temp;
+	}
+
+	Node reverseInGroups(Node h, int k) {
+		int c = 0;
+		Node prev = null;
+		Node curr = h;
+		Node next = null;
+		if (h == null)
+			return null;
+		while (c < k && curr != null) {
+			next = curr.next;
+			curr.next = prev;
+			prev = curr;
+			curr = next;
+			c++;
+		}
+		h.next = reverseInGroups(next, k);
+		this.head = prev;
+		return this.head;
+
+	}
+
+	Node reverseInGroupsAlter(Node h, int k) {
+		int c = 0;
+		Node prev = null;
+		Node curr = h;
+		Node next = null;
+		if (h == null)
+			return null;
+		while (c < k && curr != null) {
+			next = curr.next;
+			curr.next = prev;
+			prev = curr;
+			curr = next;
+			c++;
+		}
+//		System.out.println("Break");
+
+		if (curr == null)
+			return prev;
+		Node tp = prev;
+		h.next = curr;
+
+//		System.out.println("D "+h.data+" "+curr.data);
+		c = 0;
+		while (c < k && curr != null) {
+			prev = curr;
+			curr = curr.next;
+			c++;
+		}
+//		System.out.println("E "+curr.data+" "+prev.data+" "+tp.data);
+		prev.next = reverseInGroupsAlter(curr, k);
+		this.head = tp;
+		return this.head;
+
+	}
+
+	void swap(Node a, Node b, Node ap, Node bp) {
+		if (ap == null) {
+			Node tn = b.next;
+			b.next = head.next;
+			head = b;
+			bp.next = a;
+			a.next = tn;
+		}
+		Node t = a;
+		Node tn = b.next;
+		ap.next = b;
+		b.next = t.next;
+		bp.next = t;
+		t.next = tn;
+	}
+	void printNthFromLast(Node head, int n)
+	{
+		int i = 0;
+
+		if (head == null)
+			return;
+		printNthFromLast(head.next, n);
+
+		if (++i == n)
+			System.out.print(head.data);
+	}
+
+	// This code is contributed by rutvik_56.
+
+	void sort0s1s2s() {
+		Node trail = tail;
+		Node prev = null;
+		Node curr = head;
+		while (curr != null) {
+			if (curr == head) {
+				if (curr.data == 0 || curr.data == 1) {
+					prev = curr;
+					curr = curr.next;
+				} else {
+					tail.next = head;
+					tail = head;
+					tail.next = null;
+				}
+			} else {
+				if (curr.data == 0) {
+					prev.next = curr.next;
+					curr.next = head;
+					head = curr;
+					curr = prev.next;
+				} else if (curr.data == 1) {
+					prev = curr;
+					curr = curr.next;
+				} else {
+					if(curr == trail)
+						break;
+					prev.next = curr.next;
+					tail.next = curr;
+					tail = curr;
+					tail.next = null;
+					curr = prev.next;
+					if(curr.data == 2) {
+						prev = curr;
+						curr = curr.next;
+					}
+				}
+			}
+
+		}
+	}
+
 }
