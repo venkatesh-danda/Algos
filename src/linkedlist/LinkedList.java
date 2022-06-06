@@ -394,7 +394,42 @@ public class LinkedList {
 		return this.head;
 
 	}
-
+	
+	Node InstertNodeAtBeginning(Node head,int data) {
+		Node node = new Node();
+		node.data = data;
+		node.next = head;
+		head = node;
+		return head;
+	}
+	
+	Node res = null;
+	Node sumOfTwoListUtil(Node head1, Node head2, int carry) {
+		int sum = 0;
+		int act = 0;
+		if(head1 == null && head2 == null) {
+			if(carry == 0)
+				return null;
+			res = InstertNodeAtBeginning(res,carry);
+			return res;
+		}
+		if(head1 == null) {
+			sum = head2.data + carry;
+			head1 = new Node();
+		}
+		else if(head2 == null) {
+			sum = head1.data+carry;
+			head2 = new Node();
+		}
+		else {
+			sum = head1.data+head2.data+carry;
+		}
+		act = (sum)%10;
+		carry = sum/10;
+		res = InstertNodeAtBeginning(res,act);
+		sumOfTwoListUtil(head1.next,head2.next,carry);
+		return res;
+	}
 	void swap(Node a, Node b, Node ap, Node bp) {
 		if (ap == null) {
 			Node tn = b.next;
