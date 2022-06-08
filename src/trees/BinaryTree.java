@@ -41,6 +41,10 @@ public class BinaryTree {
 		System.out.print(root.data+" ");
 
 	}
+	
+	void connectInorder(Node root) {
+		
+	}
 	void levelOrderTraversal() {
 		
 	}
