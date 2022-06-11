@@ -13,6 +13,17 @@ public class DemoTree {
 		
 		System.out.println("Size : "+tree.size(root));
 		System.out.println("Height : "+tree.height(root));
+		
+		tree.levelOrderTraversal(root);
+		tree.leveOrderUsingQ(root);
+		System.out.println();
+		Node t = tree.connectInorder(root);
+		while(t!=null) {
+			System.out.print(t.data);
+			t = t.next;
+		}
 	}
+	
+	
 
 }
