@@ -3,27 +3,22 @@ package trees;
 public class DemoTree {
 	public static void main(String args[]) {
 		BinaryTree tree = new BinaryTree();
-		Node root = new Node(1);
-		root.left = new Node(2);
-		root.right = new Node(3);
-		root.left.left = new Node(4);
-		root.left.right = new Node(5);
-		root.right.left = new Node(6);
-		root.right.right = new Node(7);
-		
-		System.out.println("Size : "+tree.size(root));
-		System.out.println("Height : "+tree.height(root));
-		
-		tree.levelOrderTraversal(root);
-		tree.leveOrderUsingQ(root);
+		Node root = tree.insert(null,1);
+		tree.insert(root,2);
+		tree.insert(root,3);
+		System.out.println(root.left.data);
+		tree.insert(root,4);
+		tree.insert(root,5);
+		tree.insert(root,6);
+		tree.insert(root,7);
+		tree.insert(root,8);
+		tree.insert(root,9);
+		tree.insert(root,10);
+		tree.inorder(root);
 		System.out.println();
-		Node t = tree.connectInorder(root);
-		while(t!=null) {
-			System.out.print(t.data);
-			t = t.next;
-		}
+		tree.levelOrder(root);
+		System.out.println("\nSize : "+tree.sizeofTree(root));
+		System.out.println("Height : " + tree.heightOfTree(root));
+		System.out.println("Diameter : " + tree.diameterOfTree(root));
 	}
-	
-	
-
 }
