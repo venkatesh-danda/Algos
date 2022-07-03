@@ -1,6 +1,6 @@
 package trees;
 
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -8,7 +8,60 @@ import java.util.TreeMap;
 
 public class BinaryTree {
 
+<<<<<<< HEAD
 	
+=======
+	class LCAWrapper {
+
+		Node node;
+
+	}
+
+	boolean findLCAUtil(Node root, LCAWrapper LCA, Node x, Node y) {
+
+		if (root == null)
+			return false;
+
+		if (root == x || root == y)
+			LCA.node = root;
+
+		boolean left = findLCAUtil(root.left, LCA, x, y);
+		boolean right = findLCAUtil(root.right, LCA, x, y);
+
+		if (left && right)
+			LCA.node = root;
+
+		return left || right;
+	}
+
+	boolean isPresent(Node root, Node s) {
+		if (root == null)
+
+			return false;
+
+		if (root == s) {
+
+			return true;
+		}
+
+		return isPresent(root.left, s) || isPresent(root.right, s);
+	}
+
+	void findLCA(Node root, Node x, Node y) {
+		LCAWrapper LCA = new LCAWrapper();
+
+		if (isPresent(root, x) && isPresent(root, y)) {
+			findLCAUtil(root, LCA, x, y);
+		}
+
+		if (LCA.node != null) {
+			System.out.println("LCA : " + LCA.node.data);
+		} else {
+			System.out.println("LCA Not Found");
+		}
+	}
+
+>>>>>>> branch 'master' of https://github.com/venkatesh-danda/Algos.git
 	void boundaryTraversal(Node root) {
 		if (root == null) {
 			return;
@@ -32,14 +85,14 @@ public class BinaryTree {
 	}
 
 	void printLeaves(Node root) {
-		if(root == null) {
+		if (root == null) {
 			return;
 		}
-		
-		if(root.left == null && root.right == null) {
-			System.out.print(root.data+" ");
+
+		if (root.left == null && root.right == null) {
+			System.out.print(root.data + " ");
 		}
-		
+
 		printLeaves(root.left);
 		printLeaves(root.right);
 	}
