@@ -8,9 +8,7 @@ import java.util.TreeMap;
 
 public class BinaryTree {
 
-<<<<<<< HEAD
-	
-=======
+
 	class LCAWrapper {
 
 		Node node;
@@ -61,7 +59,7 @@ public class BinaryTree {
 		}
 	}
 
->>>>>>> branch 'master' of https://github.com/venkatesh-danda/Algos.git
+//>>>>>>> branch 'master' of https://github.com/venkatesh-danda/Algos.git
 	void boundaryTraversal(Node root) {
 		if (root == null) {
 			return;
