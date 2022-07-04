@@ -8,10 +8,50 @@ import java.util.TreeMap;
 
 public class BinaryTree {
 
-
 	class LCAWrapper {
-
 		Node node;
+	}
+
+	class LVUtil {
+		int maxLevel;
+	}
+
+	
+	void doubleTree(Node root) {
+		if(root == null)
+			return;
+		
+		doubleTree(root.left);
+		doubleTree(root.right);
+		Node oldLeft = root.left;
+		root.left = new Node(root.data);
+		root.left.left = oldLeft;
+	}
+	void LeftViewUtil(Node root, int level, LVUtil LV) {
+		if (root == null)
+			return;
+
+		if (level > LV.maxLevel) {
+			System.out.print(root.data + " ");
+			LV.maxLevel = level;
+		}
+
+		LeftViewUtil(root.left, level + 1, LV);
+		LeftViewUtil(root.right, level + 1, LV);
+	}
+
+	void leftView(Node root) {
+		LVUtil LV = new LVUtil();
+		LeftViewUtil(root, 1, LV);
+	}
+
+	void kDistanceFromroot(Node root, int k) {
+		if (root == null)
+			return;
+		if (k == 0)
+			System.out.print(root.data + " ");
+		kDistanceFromroot(root.left, k - 1);
+		kDistanceFromroot(root.right, k - 1);
 
 	}
 
@@ -71,7 +111,7 @@ public class BinaryTree {
 		rightView(root.right);
 	}
 
-	void leftView(Node root) {
+	void leftBoundary(Node root) {
 		if (root == null)
 			return;
 		if (root.left != null) {

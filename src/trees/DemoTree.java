@@ -15,7 +15,7 @@ public class DemoTree {
 		tree.insert(root,9);
 		tree.insert(root,10);
 		
-//		tree.delete(root, 9);
+//		tree.deletexxj(root, 9);
 //		tree.inorder(root);
 //		System.out.println();
 		tree.levelOrder(root);
@@ -23,5 +23,9 @@ public class DemoTree {
 		System.out.println("Height : " + tree.heightOfTree(root));
 		System.out.println("Diameter : " + tree.diameterOfTree(root));
 		System.out.print("MaxWidth : "+tree.getMaxWidth(root));
+		System.out.println();
+		tree.kDistanceFromroot(root, 3);
+		System.out.println();
+		tree.leftView(root);
 	}
 }
