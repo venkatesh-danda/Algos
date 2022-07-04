@@ -4,12 +4,39 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class BinarySearchTree {
+
 	
 	void inOrderSuccessor(Node root, Node x) {
 		if(root == null || x == null)
 			System.out.println("-1");
+		
+		if(x.right != null) {
+			Node temp = x.right;
+			while(temp.left != null) {
+				temp = temp.left;
+			}
+			
+			System.out.println(temp.data);
+		} else {
+			Node ancestor = root;
+			Node successor = null;
+			
+			while(ancestor != x) {
+				if(x.data < ancestor.data) {
+					successor = ancestor;
+					ancestor = ancestor.left;
+				} else {
+					ancestor = ancestor.right;
+				}
+				
+				if (successor != null)
+					System.out.println(successor.data);
+				else
+					System.out.println("-1");
+			}
+		}
 	}
-	if()
+	
 	
 	void lowestCommonAncestor(Node root, int x, int y) {
 		if(root == null) {

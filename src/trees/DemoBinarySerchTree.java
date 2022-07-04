@@ -20,10 +20,13 @@ public class DemoBinarySerchTree {
 		BST.levelOrder(root);
 		System.out.println();
 //		BST.addAllGreaterValues(root);
-		BST.levelOrder(root);
+//		BST.levelOrder(root);
+		BST.inOrder(root);
 		System.out.println();
 		BST.nodeWithMinValue(root);
 		System.out.println();
 		BST.lowestCommonAncestor(root, 10, 14);
+		System.out.print("Find "+root.right.data+" : ");
+		BST.inOrderSuccessor(root, root.right);
 	}
 }
