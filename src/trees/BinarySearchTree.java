@@ -4,8 +4,22 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class BinarySearchTree {
-
 	
+	
+
+	boolean isBST(Node root) {
+		if(root == null)
+			return true;
+		
+		if((root.left != null && root.left.data > root.data) || 
+				(root.right != null && root.right.data < root.data ))
+			return false;
+		
+		if(!isBST(root.left) || !isBST(root.right))
+			return false;
+		
+		return true;
+	}
 	void inOrderSuccessor(Node root, Node x) {
 		if(root == null || x == null)
 			System.out.println("-1");
@@ -15,7 +29,6 @@ public class BinarySearchTree {
 			while(temp.left != null) {
 				temp = temp.left;
 			}
-			
 			System.out.println(temp.data);
 		} else {
 			Node ancestor = root;

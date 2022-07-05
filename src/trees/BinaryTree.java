@@ -19,6 +19,70 @@ public class BinaryTree {
 	class ISSUM{
 		int sum;
 	}
+	
+	
+	int isSumTree2(Node root) {
+		if(root == null || isLeaf(root))
+			return 1;
+		
+		
+		int ls = 0;
+		int rs = 0;
+		
+		if(isSumTree2(root.left) != -1) {
+			if(isLeaf(root.left))
+				ls = root.left.data;
+			else
+				ls = 2 * root.left.data;
+		} else {
+			return -1;
+		}
+		if(isSumTree2(root.right) != -1) {
+			if(isLeaf(root.right))
+				rs = root.right.data;
+			else
+				rs = 2 * root.right.data;
+		} else {
+			return -1;
+		}
+		
+		if(root.data == ls + rs)
+			return 1;
+		return -1;
+			
+			
+			
+	}
+	
+	//Post Order
+	int isSumTree3(Node root) {
+		if(root == null)
+			return 0;
+		
+		int ls;
+		int rs;
+		
+		ls = isSumTree3(root.left);
+		
+		if(ls == -1)
+			return -1;
+		 
+		rs = isSumTree3(root.right);
+		
+		if(rs == -1)
+			return -1;
+		
+		if(isLeaf(root) || ls + rs == root.data)
+			return ls+rs+root.data;
+		
+		return -1;
+	}
+	
+	boolean isLeaf(Node root) {
+		if(root != null && root.right == null && root.left == null)
+			return true;
+		return false;
+	}
 
 	boolean isIsomorphic(Node root1, Node root2) {
 		if(root1 == null && root2 == null)
