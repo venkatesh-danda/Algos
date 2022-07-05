@@ -6,7 +6,6 @@ public class DemoTree {
 		Node root = tree.insert(null,1);
 		tree.insert(root,2);
 		tree.insert(root,3);
-//		System.out.println(root.left.data);
 		tree.insert(root,4);
 		tree.insert(root,5);
 		tree.insert(root,6);
@@ -15,9 +14,6 @@ public class DemoTree {
 		tree.insert(root,9);
 		tree.insert(root,10);
 		
-//		tree.deletexxj(root, 9);
-//		tree.inorder(root);
-//		System.out.println();
 		tree.levelOrder(root);
 		System.out.println("\nSize : "+tree.sizeofTree(root));
 		System.out.println("Height : " + tree.heightOfTree(root));

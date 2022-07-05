@@ -5,8 +5,13 @@ import java.util.Queue;
 
 public class BinarySearchTree {
 	
+
 	
 
+	void isCopmleteBinaryTree(Node root) {
+		
+	}
+	
 	boolean isBST(Node root) {
 		if(root == null)
 			return true;

@@ -6,6 +6,8 @@ import java.util.Queue;
 import java.util.Stack;
 import java.util.TreeMap;
 
+//import trees.BinarySearchTree.Height;
+
 public class BinaryTree {
 
 	class LCAWrapper {
@@ -18,6 +20,33 @@ public class BinaryTree {
 	
 	class ISSUM{
 		int sum;
+	}
+	
+	class Height {
+		int height = 0;
+	}
+	
+	boolean isBalancedUtil(Node root, Height h) {
+		if(root == null)
+			return true;
+		
+		Height lh = new Height();
+		Height rh = new Height();
+		
+		boolean l = isBalancedUtil(root.left, lh);
+		boolean r = isBalancedUtil(root.right, rh);
+		
+		if(Math.abs(lh.height - rh.height ) > 1)
+			return false;
+		
+		h.height = Math.max(lh.height, rh.height) + 1 ;
+		
+		return l && r;
+	}
+	
+	void isBalanced(Node root) {
+		Height h = new Height();
+		isBalancedUtil(root,h);
 	}
 	
 	
